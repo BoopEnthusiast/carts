@@ -43,7 +43,7 @@ tmp2 = 0
 tmp3 = 0
 -->8
 --breaks
-on_break = true
+on_break = false
 
 b = { -- current break variables
   bclr = 0, --background color
@@ -147,6 +147,25 @@ b5 = {
       y = 36,
     },
     {d = 450,},
+  },
+  d = function()
+    spr(b.fi,60,42)
+    sspr(56,8,16,16,56,90)
+  end,
+}
+
+b6 = {
+  bclr = 0,
+  tclr = 13,
+  tme = 0,
+  fi = 10,
+  t = {
+    {
+      l = "... mine was fine too",
+      d = 0,
+      y = 30,
+    },
+    {d = 600,},
   },
   d = function()
     spr(b.fi,60,42)
@@ -386,7 +405,7 @@ m5 = {
   sy = 90,
   fx = 60,
   fy = 40,
-  fi = 10,
+  fi = 7,
   qclr = 13,
   qbclr = 7,
   rclr = 1,
@@ -457,7 +476,7 @@ m6 = {
 		      
 		    },
 		    {
-		      l = "aww thanks",
+		      l = "thanks",
 		      x = 0,
 		      y = 121,
 		    },
@@ -486,7 +505,54 @@ m6 = {
   end
 }
 
-m7 = {
+m = {
+  x = 0, 
+  y = 0,
+  sx = 10,
+  sy = 100,
+  fi = 7,
+  fx = 60,
+  fy = 55,
+  qclr = 13,
+  qbclr = 7,
+  rclr = 1,
+  rbclr = 7,
+  q = {
+    {
+      l = "how has your day been hun?", -- line
+      y = 65,
+    },
+    {
+      l = "glad to be back here~",
+      y = 73,
+    },
+  },
+  r = {
+		  {
+		    {
+		      l = "fine i guess", 
+		      x = 80,
+		      y = 121,
+		    },
+		  },
+  },
+  nxt = function()
+    on_break = true
+    b = b6
+    m = m8
+    reset_p()
+    reset_pal()
+  end,
+  test_win = function()
+    music(-1)
+    if p.x > 122 then m.nxt() end
+  end,
+  d = function()
+    pal({1,2,3,4,5,9,7,8,9,4,11,12,13,14,15,16},1)
+  end,
+}
+
+m8 = {
   x = 0, 
   y = 0,
   sx = 10,
@@ -626,6 +692,7 @@ end
 function reset_pal()
   pal({1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},1)
 end
+
 -->8
 --update
 function _update()
