@@ -43,7 +43,7 @@ tmp2 = 0
 tmp3 = 0
 -->8
 --breaks
-on_break = false
+on_break = true
 
 b = { -- current break variables
   bclr = 0, --background color
@@ -505,7 +505,7 @@ m6 = {
   end
 }
 
-m = {
+m7 = {
   x = 0, 
   y = 0,
   sx = 10,
@@ -599,7 +599,12 @@ m8 = {
 }
 -->8
 --init
+debug = false
+start_map = m
+
 function _init()
+  if debug then on_break = false end
+  m = start_map
 		palt(0,false)
 		palt(tclr,true)
 		reset_p()
@@ -804,6 +809,7 @@ end
 
 
 function debug_msgs()
+  if not debug then return end
   print(tostr(tmp),0,0,7)
   print(tostr(tmp2))
   print(tostr(tmp3))
